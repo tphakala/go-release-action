@@ -112,7 +112,7 @@ else
   if [[ "${INPUT_BUILD_COMMAND}" =~ ^make.* ]]; then
     # start with make, assumes using make to build golang binaries, execute it directly
     GOAMD64=${GOAMD64_FLAG} GOARM=${GOARM_FLAG} GOOS=${INPUT_GOOS} GOARCH=${INPUT_GOARCH} eval ${INPUT_BUILD_COMMAND}
-    if [ -f "${BINARY_NAME}${EXT}" ]; then
+    if [ -f "bin/${BINARY_NAME}${EXT}" ]; then
       # assumes the binary will be generated in bin/, copy it for later processes
       cp bin/${BINARY_NAME}${EXT} ${BUILD_ARTIFACTS_FOLDER}/
     fi
