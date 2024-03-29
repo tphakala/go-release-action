@@ -113,22 +113,11 @@ else
     # start with make, assumes using make to build golang binaries, execute it directly
     GOAMD64=${GOAMD64_FLAG} GOARM=${GOARM_FLAG} GOOS=${INPUT_GOOS} GOARCH=${INPUT_GOARCH} eval ${INPUT_BUILD_COMMAND}
     if [ -f "${BINARY_NAME}${EXT}" ]; then
-      # assumes the binary will be generated in current dir, copy it for later processes
-      cp ${BINARY_NAME}${EXT} ${BUILD_ARTIFACTS_FOLDER}/
+      # assumes the binary will be generated in bin/, copy it for later processes
+      cp bin/${BINARY_NAME}${EXT} ${BUILD_ARTIFACTS_FOLDER}/
     fi
   else
     GOAMD64=${GOAMD64_FLAG} GOARM=${GOARM_FLAG} GOOS=${INPUT_GOOS} GOARCH=${INPUT_GOARCH} ${INPUT_BUILD_COMMAND} -o ${BUILD_ARTIFACTS_FOLDER}/${BINARY_NAME}${EXT} ${INPUT_BUILD_FLAGS} ${LDFLAGS_PREFIX} "${INPUT_LDFLAGS}"
-  fi
-fi
-
-# executable compression
-if [ ! -z "${INPUT_EXECUTABLE_COMPRESSION}" ]; then
-  if [[ "${INPUT_EXECUTABLE_COMPRESSION}" =~ ^upx.* ]]; then
-    # start with upx, use upx to compress the executable binary
-    eval ${INPUT_EXECUTABLE_COMPRESSION} ${BUILD_ARTIFACTS_FOLDER}/${BINARY_NAME}${EXT}
-  else
-    echo "Unsupport executable compression: ${INPUT_EXECUTABLE_COMPRESSION}!"
-    exit 1
   fi
 fi
 
