@@ -18,7 +18,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteract
   gcc-mingw-w64-x86-64 \
   gcc-mingw-w64-i686 \
   gcc-aarch64-linux-gnu \
-  g++-aarch64-linux-gnu
+  g++-aarch64-linux-gnu \
   && rm -rf /var/lib/apt/lists/*
 
 # github-assets-uploader to provide robust github assets upload
